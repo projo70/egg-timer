@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="manifest" href="manifest.json">
+
+    <style>
+        .background-dark{
+            background-color: black;
+        }
+
+        .center{
+            display:flex;
+            justify-content: center;
+        }
+
+        .margin-top{
+            margin-top: 100px;
+        }
+
+        .timer{
+            font-size: 60px;
+            color: white;
+            font-family: 'Times New Roman', Times, serif;
+        }
+    </style>
+
+     <script>
+        let alarm = new Audio ('sound/[YT2mp3.info] - Warning alarm sound effect (no copyright) (128kbps).mp3');
+        let timerStarted = false;
+
+
+        function startTimer() {
+            if (!timerStarted) {
+                let startTime = new Date() .getTime();
+                let fiveMinutes = 1000*60*5;
+                let endTime = startTime + fiveMinutes;
+
+                setInterval(function() {
+                    let timeLeft = endTime - new Date() .getTime();
+
+                    if(timeLeft > 0) {
+                        let minutes = timeLeft / (1000*60);
+                        minutes = Math.floor(minutes);
+                        let seconds = (timeLeft / 1000) % 60;
+                        seconds = Math.round(seconds);
+                        let text = '0' + minutes + ' : ' + seconds;
+                        timer.innerHTML = text;
+                    } else {
+                        alarm.play();
+                        timer.innerHTML = '00 : 00';
+                    }
+                }, 1000);
+                timerStarted = true;
+            }
+        }
+    </script>
+
+</head>
+<body class="background-dark">
+   
+    <div class="center margin-top">
+        <img src="img/cute_eggs.jpg" width="250" height="250">
+    </div>
+
+
+    <div class="center margin-top timer" id="timer">
+        05 : 00</div>
+
+
+    <div class="center margin-top">
+        <img onclick="startTimer()" src="img/Start_PP.png" width="180" height="120">
+    </div>
+
+
+
+    
+</body>
+</html>
